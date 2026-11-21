@@ -1,0 +1,115 @@
+:root{
+  --bg:#FAF7F2; --ink:#2B2B2B; --tangerine:#FF8A3D; --sky:#5AB0FF; --lemon:#FFD93B; --leaf:#58C27D;
+  --cell:#EFEAE2; --panel:#FFFFFF; --muted:#6F6A62;
+  --target:72px;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent; touch-action:manipulation}
+html,body{height:100%; margin:0; background:var(--bg); color:var(--ink);
+  font-family:Fredoka,"Nunito",system-ui,sans-serif; user-select:none; -webkit-user-select:none; overflow:hidden}
+button{font:inherit; color:inherit; cursor:pointer}
+#app{height:100%; display:flex; flex-direction:column}
+
+/* ---- gameplay ---- */
+.game{flex:1; display:grid; gap:12px; padding:12px;
+  grid-template-columns:minmax(150px,1fr) minmax(0,2.4fr) minmax(150px,1fr);
+  grid-template-rows:minmax(0,1fr) auto}
+.order{grid-column:1; grid-row:1; background:var(--panel); border:4px solid var(--ink); border-radius:24px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:12px}
+.customer{width:88px; height:88px; border-radius:50%; position:relative; background:var(--sky)}
+.customer::before,.customer::after{content:""; position:absolute; top:32px; width:11px; height:11px; border-radius:50%; background:var(--ink)}
+.customer::before{left:26px}.customer::after{right:26px}
+.customer .mouth{position:absolute; left:50%; bottom:22px; width:26px; height:12px; border:4px solid var(--ink); border-top:0;
+  border-radius:0 0 20px 20px; transform:translateX(-50%); transition:all .3s}
+.customer.waiting .mouth{height:4px; border-radius:4px; border-bottom-width:4px}
+.customer.happy{animation:bounce .6s}
+.order .num{font-size:4rem; line-height:1; font-weight:700}
+.dots{display:grid; grid-template-columns:repeat(5,1fr); gap:5px; width:110px}
+.dots i{display:block; aspect-ratio:1; border-radius:50%; background:var(--tangerine)}
+.speak{min-width:var(--target); min-height:var(--target); border-radius:50%; border:4px solid var(--ink); background:var(--lemon); font-size:1.6rem}
+
+.trayWrap{grid-column:2; grid-row:1; display:flex; align-items:center; justify-content:center; position:relative}
+.tray{width:min(100%,640px); background:var(--panel); border:4px solid var(--ink); border-radius:24px; padding:14px;
+  display:grid; grid-template-columns:repeat(5,1fr); gap:10px; position:relative}
+.cell{aspect-ratio:1; border-radius:18px; background:var(--cell); display:grid; place-items:center; position:relative;
+  min-width:var(--target); min-height:var(--target)}
+.cell.empty::after{content:""; width:26%; height:26%; border-radius:50%; border:3px dashed #C9C2B6}
+.cell.hint{animation:pulse 1s infinite}
+.cake{width:68%; height:62%; border-radius:30% 30% 22% 22%; background:var(--lemon); position:relative}
+.cake::after{content:""; position:absolute; left:16%; right:16%; top:-24%; height:52%; border-radius:50%; background:var(--tangerine)}
+.cake.pop{animation:pop .25s}
+.door{position:absolute; inset:-4px; border-radius:24px; background:var(--ink); color:var(--lemon); display:grid; place-items:center;
+  transform-origin:left center; transform:scaleX(0); transition:transform .45s cubic-bezier(.2,.8,.2,1); pointer-events:none}
+.door.closed{transform:scaleX(1); pointer-events:auto}
+.door .big{font-size:6rem; line-height:1; font-weight:700}
+.door .sub{font-size:1.2rem; opacity:.85}
+
+.oven{grid-column:3; grid-row:1; background:var(--ink); color:var(--bg); border-radius:24px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:10px; padding:12px; font-weight:700}
+.oven .window{width:74%; aspect-ratio:1.1; border-radius:16px; border:5px solid var(--lemon); display:grid; place-items:center;
+  font-size:2.6rem; color:var(--lemon); background:#1b1b1b}
+.oven .window.lit{background:#3a2a10; box-shadow:inset 0 0 30px #FF8A3D88}
+
+.rack{grid-column:1/4; grid-row:2; background:var(--panel); border:4px solid var(--ink); border-radius:24px; min-height:110px;
+  display:flex; align-items:center; justify-content:center; gap:14px; padding:10px; flex-wrap:wrap}
+.rack .cakeBtn{width:var(--target); height:var(--target); border:0; background:transparent; display:grid; place-items:center; touch-action:none}
+.rack .cakeBtn .cake{width:52px; height:46px}
+.numShelf{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
+.numBtn{min-width:var(--target); min-height:var(--target); border-radius:18px; border:4px solid var(--ink); background:var(--panel);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:6px 8px}
+.numBtn b{font-size:1.6rem; line-height:1}
+.numBtn .mini{display:grid; grid-template-columns:repeat(5,1fr); gap:2px; width:40px}
+.numBtn .mini i{display:block; aspect-ratio:1; border-radius:50%; background:var(--sky)}
+.numBtn .mini i.off{background:var(--cell)}
+.numBtn.dim{opacity:.35}
+
+.dragGhost{position:fixed; pointer-events:none; z-index:50; width:70px; height:62px; transform:translate(-50%,-60%)}
+.dragGhost .cake{width:100%; height:100%}
+
+/* ---- screens ---- */
+.screen{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; padding:24px; text-align:center}
+.screen h1{font-size:clamp(1.8rem,5vw,3rem); margin:0}
+.screen p{font-size:1.25rem; max-width:40ch; margin:0; color:var(--muted)}
+.bigBtn{min-width:220px; min-height:96px; border-radius:28px; border:5px solid var(--ink); background:var(--lemon); font-size:1.8rem; font-weight:700; padding:12px 28px}
+.bigBtn.alt{background:var(--sky)}
+.bigBtn.plain{background:var(--panel)}
+.row{display:flex; gap:20px; flex-wrap:wrap; justify-content:center}
+.shelf{display:flex; gap:14px; flex-wrap:wrap; justify-content:center}
+.box{width:92px; height:72px; border-radius:16px; border:4px solid var(--ink); background:var(--tangerine); display:grid; place-items:center; font-size:1.8rem; font-weight:700; color:var(--ink)}
+.box.empty{background:var(--cell); color:var(--muted)}
+.tiny{position:fixed; bottom:8px; right:10px; font-size:.75rem; color:var(--muted); text-decoration:none; opacity:.5}
+.topbar{display:flex; justify-content:space-between; align-items:center; padding:8px 12px 0; font-size:.95rem; color:var(--muted)}
+.topbar button{min-width:var(--target); min-height:48px; border-radius:14px; border:3px solid var(--ink); background:var(--panel)}
+
+/* ---- results (tester) ---- */
+.results{flex:1; overflow:auto; padding:20px; font-family:system-ui,sans-serif; user-select:text; -webkit-user-select:text}
+.results h1{font-size:1.4rem}
+.results table{border-collapse:collapse; width:100%; font-size:.85rem; margin:10px 0 20px}
+.results td,.results th{border:1px solid #ddd; padding:6px; text-align:left; vertical-align:top}
+.results .ok{color:#1b7f3a}.results .no{color:#b23a1d}
+.results button{min-height:44px; padding:8px 14px; border-radius:10px; border:2px solid var(--ink); background:var(--panel); margin-right:8px}
+.results pre{background:#fff; border:1px solid #ddd; padding:10px; max-height:240px; overflow:auto; font-size:.75rem}
+
+@keyframes pop{0%{transform:scale(.4)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}40%{transform:translateY(-14px)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #5AB0FF00}50%{box-shadow:0 0 0 8px #5AB0FF66}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important; transition:none!important}}
+
+@media (max-width: 760px), (orientation: portrait){
+  .game{grid-template-columns:minmax(0,1fr) minmax(0,1fr); grid-template-rows:auto minmax(0,1fr) auto}
+  .game > *{min-width:0}
+  .order{grid-column:1/3; grid-row:1; flex-direction:row; justify-content:space-around; gap:8px; padding:8px; border-radius:18px}
+  .order .num{font-size:2.6rem}
+  .order .dots{width:86px}
+  .customer{width:64px; height:64px}
+  .customer::before,.customer::after{top:24px; width:8px; height:8px}
+  .customer::before{left:19px}.customer::after{right:19px}
+  .customer .mouth{bottom:15px; width:20px; height:9px}
+  .speak{min-width:56px; min-height:56px; font-size:1.2rem}
+  .oven{display:none}
+  .trayWrap{grid-column:1/3; grid-row:2}
+  .tray{padding:8px; gap:6px; border-radius:18px}
+  .cell{min-width:0; min-height:0; border-radius:12px}
+  .rack{grid-column:1/3; grid-row:3; gap:8px}
+  .door .big{font-size:4rem}
+  .game{gap:8px; padding:8px}
+}

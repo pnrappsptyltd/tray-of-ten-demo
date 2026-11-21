@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Friends of ten in five minutes</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#FAF7F2;--ink:#2B2B2B;--tangerine:#FF8A3D;--sky:#5AB0FF;--lemon:#FFD93B;--muted:#6F6A62;--panel:#fff}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Fredoka,system-ui,sans-serif;padding:24px 16px 60px;line-height:1.5}
+  main{max-width:60ch;margin:0 auto}
+  h1{font-size:2rem;margin:0 0 6px}
+  h2{font-size:1.2rem;margin:24px 0 6px}
+  p,li{font-size:1.05rem}
+  .muted{color:var(--muted)}
+  .codes{display:grid;gap:8px}
+  .code{background:var(--panel);border:3px solid var(--ink);border-radius:14px;padding:10px 12px}
+  .code b{display:block}
+  .cta{display:inline-block;background:var(--lemon);border:4px solid var(--ink);border-radius:18px;padding:12px 20px;font-weight:700;text-decoration:none;color:var(--ink);font-size:1.2rem;margin:8px 0}
+  form{background:var(--panel);border:3px solid var(--ink);border-radius:18px;padding:16px;display:grid;gap:14px}
+  fieldset{border:0;padding:0;margin:0}
+  legend{font-weight:700;margin-bottom:6px}
+  label.opt{display:inline-flex;align-items:center;gap:6px;margin-right:14px;min-height:44px}
+  input[type=text],input[type=email],textarea{width:100%;font:inherit;padding:10px;border:2px solid var(--ink);border-radius:10px}
+  button{font:inherit;font-weight:700;background:var(--sky);border:4px solid var(--ink);border-radius:14px;padding:12px 18px;min-height:52px}
+  .thanks{display:none;background:var(--panel);border:3px solid var(--ink);border-radius:18px;padding:16px}
+  small a{color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+  <h1>Friends of ten in five minutes</h1>
+  <p class="muted">A prototype of a small bakery game for children in their first year of school. No login, no ads, nothing leaves the device.</p>
+  <a class="cta" href="index.html">Play the demo</a>
+
+  <h2>What it practises</h2>
+  <ul>
+    <li>Filling a tray of ten: how many more make 10 (friends of ten / number bonds / make 10).</li>
+    <li>Counting on from a known number.</li>
+    <li>Moving from counting what you can see to knowing the pair: the tray goes into the oven and the child says how many more.</li>
+  </ul>
+
+  <h2>Curriculum</h2>
+  <div class="codes">
+    <div class="code"><b>Australia · AC9MFN04 (Foundation)</b>Partition and combine collections up to 10 using part-part-whole relationships and subitising.</div>
+    <div class="code"><b>USA · K.OA.A.4 (Kindergarten)</b>For any number from 1 to 9, find the number that makes 10 when added to the given number.</div>
+    <div class="code"><b>England · Year 1</b>Represent and use number bonds and related subtraction facts within 20.</div>
+  </div>
+  <p class="muted">This page describes what the game practises. It makes no claim about learning outcomes.</p>
+
+  <h2>Two questions</h2>
+  <form id="f">
+    <fieldset>
+      <legend>I am a…</legend>
+      <label class="opt"><input type="radio" name="role" value="teacher" required> teacher / educator</label>
+      <label class="opt"><input type="radio" name="role" value="parent"> parent / carer</label>
+      <label class="opt"><input type="radio" name="role" value="tutor"> tutor</label>
+    </fieldset>
+    <fieldset>
+      <legend>Would you put this on a class device or send the link home this term? (teachers) · Would you share it with another parent? (parents)</legend>
+      <label class="opt"><input type="radio" name="share" value="yes" required> yes</label>
+      <label class="opt"><input type="radio" name="share" value="maybe"> maybe</label>
+      <label class="opt"><input type="radio" name="share" value="no"> no</label>
+    </fieldset>
+    <fieldset>
+      <legend>If a full version (all number pairs to 10, then to 20, no ads, one payment) were in the App Store today at A$4.99, would you buy it?</legend>
+      <label class="opt"><input type="radio" name="pay" value="yes" required> yes</label>
+      <label class="opt"><input type="radio" name="pay" value="maybe"> maybe</label>
+      <label class="opt"><input type="radio" name="pay" value="no"> no</label>
+    </fieldset>
+    <label>Tell me when it is out (optional, stays on this device for the tester to collect)<input type="email" name="contact" placeholder="email"></label>
+    <label>Anything that put you off, or that you liked (optional)<textarea name="comment" rows="3"></textarea></label>
+    <button type="submit">Save answers</button>
+  </form>
+  <div class="thanks" id="thanks">Saved on this device. Thank you.</div>
+  <p><small><a href="index.html#results">tester results</a></small></p>
+</main>
+<script>
+  const KEY = 'bakery-proto-v1';
+  document.getElementById('f').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    let data; try { data = JSON.parse(localStorage.getItem(KEY)) || { shifts: [], forms: [] }; } catch { data = { shifts: [], forms: [] }; }
+    data.forms.push({ at: new Date().toISOString(), role: fd.get('role'), share: fd.get('share'), pay: fd.get('pay'), contact: fd.get('contact') || '', comment: fd.get('comment') || '' });
+    try { localStorage.setItem(KEY, JSON.stringify(data)); } catch {}
+    e.target.reset(); e.target.style.display = 'none'; document.getElementById('thanks').style.display = 'block';
+  });
+</script>
+</body>
+</html>

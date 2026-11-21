@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fill the tray of ten — printable</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4 portrait; margin: 12mm; }
+  :root{--ink:#2B2B2B;--muted:#6F6A62;--line:#C9C2B6;--cell:#F3EFE8;--lemon:#FFD93B;--tangerine:#FF8A3D;--sky:#5AB0FF}
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);font-family:Fredoka,system-ui,sans-serif;background:#fff}
+  .page{width:186mm;min-height:273mm;margin:0 auto;padding:0;position:relative;page-break-after:always}
+  .page:last-child{page-break-after:auto}
+  h1{font-size:26pt;margin:0 0 2mm;line-height:1.1}
+  h2{font-size:14pt;margin:4mm 0 1.5mm}
+  .sub{color:var(--muted);font-size:11pt;margin:0 0 6mm}
+  .tray{display:grid;grid-template-columns:repeat(5,1fr);gap:4mm;padding:5mm;border:1.2mm solid var(--ink);border-radius:8mm;background:#fff}
+  .cell{aspect-ratio:1;border-radius:5mm;background:var(--cell);display:grid;place-items:center}
+  .cell::after{content:"";width:9mm;height:9mm;border-radius:50%;border:.7mm dashed var(--line)}
+  ol{margin:0;padding-left:6mm;font-size:11pt;line-height:1.45}
+  .say{border:.6mm solid var(--ink);border-radius:5mm;padding:4mm 5mm;font-size:11pt;line-height:1.5;margin-top:4mm}
+  .say b{display:block;font-size:11.5pt;margin-bottom:1mm}
+  .codes{font-size:8.5pt;color:var(--muted);margin-top:5mm;line-height:1.4}
+  .foot{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:flex-end;gap:6mm;font-size:9pt;color:var(--muted)}
+  .qr{width:28mm;height:28mm;border:.5mm dashed var(--line);border-radius:3mm;display:grid;place-items:center;text-align:center;font-size:8pt;padding:2mm}
+  .qr img,.qr canvas{width:26mm!important;height:26mm!important}
+  /* page 2 */
+  .counters{display:grid;grid-template-columns:repeat(6,1fr);gap:2mm}
+  .counter{aspect-ratio:1.3;border:.4mm dashed var(--line);border-radius:3mm;display:grid;place-items:center}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:2mm;margin-top:2mm}
+  .card{border:.5mm dashed var(--line);border-radius:4mm;padding:2mm 3mm;display:flex;align-items:center;gap:3mm}
+  .card .n{font-size:22pt;font-weight:700;width:14mm;text-align:center}
+  .card .dots{display:grid;grid-template-columns:repeat(5,1fr);gap:1mm;width:26mm}
+  .card .dots i{display:block;aspect-ratio:1;border-radius:50%;background:var(--tangerine)}
+  .card .dots i.off{background:var(--cell);border:.3mm solid var(--line)}
+  .card .q{font-size:8pt;color:var(--muted);line-height:1.2}
+  .door{margin-top:4mm;border:.6mm dashed var(--ink);border-radius:8mm;height:82mm;background:var(--ink);color:var(--lemon);display:grid;place-items:center;text-align:center;padding:4mm}
+  .door b{font-size:22pt}
+  .door span{font-size:9.5pt;color:#fff;opacity:.9}
+  .tip{font-size:9.5pt;color:var(--muted);margin-top:2mm;line-height:1.4}
+  @media screen{body{background:#eee;padding:10mm 0}.page{background:#fff;padding:12mm;box-shadow:0 2px 12px rgba(0,0,0,.15);margin-bottom:10mm;min-height:297mm;width:210mm}.foot{left:12mm;right:12mm;bottom:12mm}}
+</style>
+</head>
+<body>
+
+<section class="page">
+  <h1>Fill the tray of ten</h1>
+  <p class="sub">Friends of ten · number bonds · make 10 · for children in their first year of school</p>
+
+  <div class="tray" aria-label="ten frame tray">
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+  </div>
+
+  <h2>How to play (two minutes)</h2>
+  <ol>
+    <li>Cut out the cupcakes and the order cards from page 2.</li>
+    <li>Pick an order card. Put that many cupcakes on the tray, filling the top row first.</li>
+    <li>Ask: <b>"How many more make ten?"</b> Let your child add cupcakes and count on: "seven, eight, nine, ten!"</li>
+    <li>When that feels easy, use the <b>oven door</b>: cover the tray and ask the same question. Peek if they need to.</li>
+  </ol>
+
+  <div class="say">
+    <b>Say it like this</b>
+    "The tray has 6. How many more make 10?" · "Show me with your fingers." · "How did you know?" · "Let's check: count on from 6."
+    <br>Keep it short. Stop while it is still fun.
+  </div>
+
+  <p class="codes">What it practises: part-part-whole to 10, counting on, and recalling the pairs that make 10.
+  Australian Curriculum AC9MFN04 (Foundation) · England Year 1: number bonds within 20 · USA K.OA.A.4 (Kindergarten).
+  This sheet describes practice; it makes no claim about learning outcomes.</p>
+
+  <div class="foot">
+    <div>Free bakery demo: play the same tray game on a tablet.<br><span id="urltext">Link: ______________________________</span></div>
+    <div class="qr" id="qr">Scan for the demo<br>(QR appears when a link is set)</div>
+  </div>
+</section>
+
+<section class="page">
+  <h1>Cupcakes and orders</h1>
+  <p class="sub">Cut along the dashed lines. Twelve cupcakes, nine order cards, one oven door.</p>
+
+  <div class="counters">
+    <!-- 12 cupcakes -->
+    <div class="counter"><svg width="60" height="56" viewBox="0 0 60 56"><rect x="10" y="22" width="40" height="30" rx="8" fill="#FFD93B" stroke="#2B2B2B" stroke-width="2"/><ellipse cx="30" cy="20" rx="22" ry="12" fill="#FF8A3D" stroke="#2B2B2B" stroke-width="2"/><circle cx="30" cy="9" r="3" fill="#E96A7A"/></svg></div>
+    <div class="counter"><svg width="60" height="56" viewBox="0 0 60 56"><rect x="10" y="22" width="40" height="30" rx="8" fill="#FFD93B" stroke="#2B2B2B" stroke-width="2"/><ellipse cx="30" cy="20" rx="22" ry="12" fill="#FF8A3D" stroke="#2B2B2B" stroke-width="2"/><circle cx="30" cy="9" r="3" fill="#E96A7A"/></svg></div>
+    <div class="counter"><svg width="60" height="56" viewBox="0 0 60 56"><rect x="10" y="22" width="40" height="30" rx="8" fill="#FFD93B" stroke="#2B2B2B" stroke-width="2"/><ellipse cx="30" cy="20" rx="22" ry="12" fill="#FF8A3D" stroke="#2B2B2B" stroke-width="2"/><circle cx="30" cy="9" r="3" fill="#E96A7A"/></svg></div>
+    <div class="counter"><svg width="60" height="56" viewBox="0 0 60 56"><rect x="10" y="22" width="40" height="30" rx="8" fill="#FFD93B" stroke="#2B2B2B" stroke-width="2"/><ellipse cx="30" cy="20" rx="22" ry="12" fill="#FF8A3D" stroke="#2B2B2B" stroke-width="2"/><circle cx="30" cy="9" r="3" fill="#E96A7A"/></svg></div>
+    <div class="counter"><svg width="60" height="56" viewBox="0 0 60 56"><rect x="10" y="22" width="40" height="30" rx="8" fill="#FFD93B" stroke="#2B2B2B" stroke-width="2"/><ellipse cx="30" cy="20" rx="22" ry="12" fill="#FF8A3D" stroke="#2B2B2B" stroke-width="2"/><circle cx="30" cy="9" r="3" fill="#E96A7A"/></svg></div>
+    <div class="counter"><svg width="60" height="56" viewBox="0 0 60 56"><rect x="10" y="22" width="40" height="30" rx="8" fill="#FFD93B" stroke="#2B2B2B" stroke-width="2"/><ellipse cx="30" cy="20" rx="22" ry="12" fill="#FF8A3D" stroke="#2B2B2B" stroke-width="2"/><circle cx="30" cy="9" r="3" fill="#E96A7A"/></svg></div>
+    <div class="counter"><svg width="60" height="56" viewBox="0 0 60 56"><rect x="10" y="22" width="40" height="30" rx="8" fill="#FFD93B" stroke="#2B2B2B" stroke-width="2"/><ellipse cx="30" cy="20" rx="22" ry="12" fill="#FF8A3D" stroke="#2B2B2B" stroke-width="2"/><circle cx="30" cy="9" r="3" fill="#E96A7A"/></svg></div>
+    <div class="counter"><svg width="60" height="56" viewBox="0 0 60 56"><rect x="10" y="22" width="40" height="30" rx="8" fill="#FFD93B" stroke="#2B2B2B" stroke-width="2"/><ellipse cx="30" cy="20" rx="22" ry="12" fill="#FF8A3D" stroke="#2B2B2B" stroke-width="2"/><circle cx="30" cy="9" r="3" fill="#E96A7A"/></svg></div>
+    <div class="counter"><svg width="60" height="56" viewBox="0 0 60 56"><rect x="10" y="22" width="40" height="30" rx="8" fill="#FFD93B" stroke="#2B2B2B" stroke-width="2"/><ellipse cx="30" cy="20" rx="22" ry="12" fill="#FF8A3D" stroke="#2B2B2B" stroke-width="2"/><circle cx="30" cy="9" r="3" fill="#E96A7A"/></svg></div>
+    <div class="counter"><svg width="60" height="56" viewBox="0 0 60 56"><rect x="10" y="22" width="40" height="30" rx="8" fill="#FFD93B" stroke="#2B2B2B" stroke-width="2"/><ellipse cx="30" cy="20" rx="22" ry="12" fill="#FF8A3D" stroke="#2B2B2B" stroke-width="2"/><circle cx="30" cy="9" r="3" fill="#E96A7A"/></svg></div>
+    <div class="counter"><svg width="60" height="56" viewBox="0 0 60 56"><rect x="10" y="22" width="40" height="30" rx="8" fill="#FFD93B" stroke="#2B2B2B" stroke-width="2"/><ellipse cx="30" cy="20" rx="22" ry="12" fill="#FF8A3D" stroke="#2B2B2B" stroke-width="2"/><circle cx="30" cy="9" r="3" fill="#E96A7A"/></svg></div>
+    <div class="counter"><svg width="60" height="56" viewBox="0 0 60 56"><rect x="10" y="22" width="40" height="30" rx="8" fill="#FFD93B" stroke="#2B2B2B" stroke-width="2"/><ellipse cx="30" cy="20" rx="22" ry="12" fill="#FF8A3D" stroke="#2B2B2B" stroke-width="2"/><circle cx="30" cy="9" r="3" fill="#E96A7A"/></svg></div>
+  </div>
+
+  <h2>Order cards</h2>
+  <div class="cards" id="cards"></div>
+
+  <div class="door"><div><b>OVEN DOOR</b><br><span>Cut out. Cover the tray. Ask: "How many more make ten?"<br>Lift to peek if your child needs to count on.</span></div></div>
+  <p class="tip">Tip: start with 5 and 9 on the tray (easy pairs), then 6, 7, 8, then the rest. Two or three orders a day is plenty.</p>
+</section>
+
+<script>
+  // Order cards 1–9 with 2×5 dot patterns
+  const cards = document.getElementById('cards');
+  for (let n = 1; n <= 9; n++) {
+    const card = document.createElement('div'); card.className = 'card';
+    const dots = Array.from({length: 10}, (_, i) => `<i class="${i < n ? '' : 'off'}"></i>`).join('');
+    card.innerHTML = `<div class="n">${n}</div><div><div class="dots">${dots}</div><div class="q">The tray has ${n}.<br>How many more make 10?</div></div>`;
+    cards.append(card);
+  }
+  // Optional QR: open printable.html?url=https://your-demo-link to embed it before printing.
+  const url = new URLSearchParams(location.search).get('url');
+  if (url) {
+    document.getElementById('urltext').textContent = url;
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+    s.onload = () => { const q = document.getElementById('qr'); q.textContent = ''; new QRCode(q, { text: url, width: 98, height: 98, correctLevel: QRCode.CorrectLevel.M }); };
+    document.head.append(s);
+  }
+</script>
+</body>
+</html>
